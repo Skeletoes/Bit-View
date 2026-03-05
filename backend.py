@@ -156,13 +156,13 @@ def user_login():
         # Here you would normally validate the username and password
         username = request.form['username']
         password = request.form['password']
-        query = """SELECT * FROM users WHERE username = ? AND password = ?"""
+        query = """SELECT * FROM user WHERE username = ? AND password = ?"""
         user = query_db(query, (username, password), one=True)
         if user is not None:
-            flash("Login successful!")
-            return redirect(url_for('upload_file'))
+            print(f"User '{username}' logged in successfully!")
+            return redirect(url_for('home'))
         else:
-            flash("Invalid username or password.")
+            print(f"Login failed")
     return render_template('login.html')
 
 @app.route('/home')
