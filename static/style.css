@@ -8,23 +8,102 @@ body {
 }
 
 .login-box {
-    width: 300px;
-    height: 300px;
+    width: 18.75rem;
+    height: 18.75rem;
     background-color: #05489a;
-    border-radius: 10px;
-    padding: 20px;
-    margin: 100px auto;
+    border-radius: 0.625rem;
+    padding: 1.25rem;
+    margin: 6.25rem auto;
     position: static;
 }
 
 .login-box h1 {
     color: white;
     text-align: center;
-    margin-bottom: 20px;
 }
 
 .login-box label {
     color: white;
     display: block;
-    margin-bottom: 5px;
+}
+
+.login-box input[type="text"],
+.login-box input[type="password"] {
+    width: 100%;
+    padding: 0.625rem 0rem;
+    margin-bottom: 0.625rem;
+    border: none;
+    border-radius: 0.3125rem;
+}
+
+.login-box input[type="submit"] {
+    width: 100%;
+    padding: 0.625rem;
+    background-color: #05769a;
+    color: white;
+    border: none;
+    border-radius: 0.3125rem;
+    cursor: pointer;
+}
+
+
+
+.logo-background {
+    position: fixed;
+    top: 5vw;
+    left: 0vw;
+    width: 20vw;
+    height: 20vw;
+    background-color: #05489a;
+    clip-path: polygon(-20% 4%, 0% 50%, 75% 50%, 101% 2%);  /* Custom angular shape */
+    z-index: -2;  /* Position behind other elements */
+}
+
+.header-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6vw;
+    background-color: #05489a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
+    z-index: -1;  /* Position behind other elements */
+}
+
+.header-bar input[type="text"] {
+    padding: 1rem;
+    border: none;
+    border-radius: 1rem;
+    position: absolute;
+    top: 1.5rem;
+    left: 37.5rem;
+    z-index: 1;  /* Ensure the input is above the header background */
+    width: 20rem;
+}
+
+.header-bar button[type="submit"] {
+    padding: 0.62rem 1rem;
+    background-color: #05769a;
+    color: white;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    position: absolute;
+    top: 1.5rem;
+    left: 56rem;
+    z-index: 1;  /* Ensure the button is above the header background */
+}
+
+.header-bar button[type="button"] {
+    position: absolute;
+    right: 3rem;
+    padding: 1rem 1rem;
+    background-color: #05769a;
+    color: white;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
 }
