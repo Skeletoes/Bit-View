@@ -2,4 +2,13 @@
 {% block body %}
 
 
+<div class="logo-background"></div>
+<div class="header-bar">
+    <form class="search-form" action="/search" method="GET">
+        <input type="text" placeholder="Search...">
+        <button type="submit"><i class="material-icons">search</i></button>
+    </form>
+    <button type="button" onclick="location.href='/'">Exit</button>
+</div>
+
 {% endblock %}
