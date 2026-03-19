@@ -1,3 +1,9 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     background-image: url('images/VOLT-VIEW_background.jpg');
     background-size: cover;
@@ -7,13 +13,41 @@ body {
     
 }
 
+.flashes {
+    list-style: none;
+    margin: 0.83vw auto;
+    padding: 0;
+    width: 15.63vw;
+}
+
+.flashes li {
+    padding: 0.42vw;
+    margin-bottom: 0.42vw;
+    border-radius: 0.26vw;
+    color: white;
+    text-align: center;
+}
+
+.flashes li.error {
+    background-color: #dc3545; /* Red for errors */
+}
+
+.flashes li.success {
+    background-color: #28a745; /* Green for success */
+}
+
+.flashes li.warning {
+    background-color: #ffc107; /* Yellow for warnings */
+    color: black;
+}
+
 .login-box {
-    width: 18.75rem;
-    height: 18.75rem;
+    width: 17vw;
+    height: 20vw;
     background-color: #05489a;
-    border-radius: 0.625rem;
-    padding: 1.25rem;
-    margin: 6.25rem auto;
+    border-radius: 0.52vw;
+    padding: 1.04vw;
+    margin: 5.21vw;
     position: static;
 }
 
@@ -30,19 +64,19 @@ body {
 .login-box input[type="text"],
 .login-box input[type="password"] {
     width: 100%;
-    padding: 0.625rem 0rem;
-    margin-bottom: 0.625rem;
+    padding: 0.52vw 0vw;
+    margin-bottom: 0.52vw;
     border: none;
-    border-radius: 0.3125rem;
+    border-radius: 0.26vw;
 }
 
 .login-box input[type="submit"] {
     width: 100%;
-    padding: 0.625rem;
+    padding: 0.52vw;
     background-color: #05769a;
     color: white;
     border: none;
-    border-radius: 0.3125rem;
+    border-radius: 0.26vw;
     cursor: pointer;
 }
 
@@ -69,41 +103,65 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 1rem;
+    padding: 0 0.83vw;
     z-index: -1;  /* Position behind other elements */
 }
 
 .header-bar input[type="text"] {
-    padding: 1rem;
+    padding: 0.83vw;
     border: none;
-    border-radius: 1rem;
+    border-radius: 0.83vw;
     position: absolute;
-    top: 1.5rem;
-    left: 37.5rem;
+    top: 1.5vw;
+    left: 40vw;
     z-index: 1;  /* Ensure the input is above the header background */
-    width: 20rem;
+    width: 20vw;
 }
 
 .header-bar button[type="submit"] {
-    padding: 0.62rem 1rem;
+    padding: 0.45vw 0.83vw;
     background-color: #05769a;
     color: white;
     border: none;
-    border-radius: 1rem;
+    border-radius: 0.83vw;
     cursor: pointer;
     position: absolute;
-    top: 1.5rem;
-    left: 56rem;
+    top: 1.5vw;
+    left: 56.8vw;
     z-index: 1;  /* Ensure the button is above the header background */
 }
 
 .header-bar button[type="button"] {
     position: absolute;
-    right: 3rem;
-    padding: 1rem 1rem;
+    right: 3vw;
+    top: 1.5vw;
+    padding: 0.83vw 0.83vw;
     background-color: #05769a;
     color: white;
     border: none;
-    border-radius: 1rem;
+    border-radius: 0.83vw;
     cursor: pointer;
+}
+
+.controls ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 15vw;
+    background-color: #05489a;
+    position: absolute;
+    top: 15vw;
+    left: 0;
+}
+
+.controls li a {
+    display: block;
+    color: rgb(255, 255, 255);
+    padding: 1.33vw 2.67vw;
+    text-decoration: none;
+}
+
+.controls li a:hover {
+    background-color: #05769a;
+    color: white;
 }

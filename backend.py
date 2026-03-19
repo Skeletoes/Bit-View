@@ -25,8 +25,8 @@ from flaskwebgui import FlaskUI
 # ----------------------------------------------------------------------------
 # Configuration constants
 # ----------------------------------------------------------------------------
-UPLOAD_FOLDER = 'upload_folder'
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'exe'}
 
 # Determine path to database; supports normal script and PyInstaller bundle
 if getattr(sys, 'frozen', False):
@@ -42,7 +42,8 @@ DATABASE = os.path.join(database_dir, 'database.db')
 # Application setup
 # ----------------------------------------------------------------------------
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.secret_key = "qa567-KLu8T-ZgD45-9sdfg-1234"  # Needed for flashing messages
+
 
 def allowed_file(filename):
     """Return True if the filename has an allowed extension.
@@ -130,7 +131,7 @@ def upload_file():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('download_file', name=filename))
-    return render_template('uploadFile.html')
+    return render_template('upload_file.html')
 
 # ----------------------------------------------------------------------------
 # Route handlers
@@ -156,18 +157,22 @@ def user_login():
         # Here you would normally validate the username and password
         username = request.form['username']
         password = request.form['password']
-        query = """SELECT * FROM user WHERE username = ? AND password = ?"""
+        query = """SELECT * FROM users WHERE username = ? AND password = ?"""
         user = query_db(query, (username, password), one=True)
         if user is not None:
             print(f"User '{username}' logged in successfully!")
+            USER_FOLDER = user[6]
+            app.config['UPLOAD_FOLDER'] = USER_FOLDER
             return redirect(url_for('home'))
         else:
-            print(f"Login failed")
+            flash("Invalid credentials!", "error")
     return render_template('login.html')
 
 @app.route('/home')
 def home():
     return render_template('home.html')
+
+
 
 if __name__ == '__main__':
     FlaskUI(app=app, server="flask", width=800, height=480, port=8000).run()

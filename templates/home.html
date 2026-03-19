@@ -1,4 +1,15 @@
 {% extends "layout.html" %}
+{% block flashes %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+{% endblock %}
 {% block body %}
 
 
@@ -9,6 +20,18 @@
         <button type="submit"><i class="material-icons">search</i></button>
     </form>
     <button type="button" onclick="location.href='/'">Exit</button>
+</div>
+<div class="controls">
+    <ul>
+        <li><a href="/upload">Upload</a></li>
+        <li><a href="/download">Download</a></li>
+        <li><a href="/new-folder">New Folder</a></li>
+        <li><a href="/rename">Rename</a></li>
+        <li><a href="/delete">Delete</a></li>
+    </ul>
+</div>
+
+    </ul>
 </div>
 
 {% endblock %}
