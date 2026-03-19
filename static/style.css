@@ -42,13 +42,20 @@ body {
 }
 
 .login-box {
-    width: 17vw;
-    height: 20vw;
+    width: min(25vw, 30vw);
+    max-width: 30vw;
     background-color: #05489a;
     border-radius: 0.52vw;
     padding: 1.04vw;
-    margin: 5.21vw;
+    margin: 5.21vw auto;
     position: static;
+    height: auto; /* allow it to expand with content */
+}
+
+.login-box form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .login-box h1 {
@@ -64,8 +71,9 @@ body {
 .login-box input[type="text"],
 .login-box input[type="password"] {
     width: 100%;
-    padding: 0.52vw 0vw;
-    margin-bottom: 0.52vw;
+    min-width: 0;
+    padding: 0.52vw 0.52vw;
+    margin-bottom: 0;
     border: none;
     border-radius: 0.26vw;
 }
@@ -81,6 +89,49 @@ body {
 }
 
 
+
+.upload-box,
+.login-box {
+    width: min(25vw, 30vw);
+    max-width: 30vw;
+    background-color: #05489a;
+    border-radius: 0.52vw;
+    padding: 1.04vw;
+    margin: 5.21vw auto;
+    position: static;
+    height: auto;
+}
+
+.upload-box form,
+.login-box form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.upload-box h1,
+.login-box h1 {
+    color: white;
+    text-align: center;
+}
+
+.upload-box label,
+.login-box label {
+    color: white;
+    display: block;
+}
+
+.upload-box input[type="file"],
+.login-box input[type="text"],
+.login-box input[type="password"] {
+    width: 100%;
+    min-width: 0;
+    padding: 0.52vw 0.52vw;
+    margin-bottom: 0;
+    border: none;
+    border-radius: 0.26vw;
+    background-color: #ffffff;
+}
 
 .logo-background {
     position: fixed;

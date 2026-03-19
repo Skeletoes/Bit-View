@@ -94,15 +94,6 @@ def query_db(query, args=(), one=False):
     cur.close()
     return (rv[0] if rv else None) if one else rv
 
-@app.route('/download/<name>')
-def download_file(name):
-    """Dummy download endpoint.
-
-    In a production version this would send the file back to the client
-    using ``send_from_directory`` or a similar helper. Here it simply
-    returns a string for demonstration purposes.
-    """
-    return f"File '{name}' downloaded!"
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
@@ -130,7 +121,7 @@ def upload_file():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('download_file', name=filename))
+            return redirect(url_for('home'))
     return render_template('upload_file.html')
 
 # ----------------------------------------------------------------------------
