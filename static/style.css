@@ -41,44 +41,11 @@ body {
     color: black;
 }
 
-.login-box {
-    width: min(25vw, 30vw);
-    max-width: 30vw;
-    background-color: #05489a;
-    border-radius: 0.52vw;
-    padding: 1.04vw;
-    margin: 5.21vw auto;
-    position: static;
-    height: auto; /* allow it to expand with content */
-}
 
-.login-box form {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
 
-.login-box h1 {
-    color: white;
-    text-align: center;
-}
-
-.login-box label {
-    color: white;
-    display: block;
-}
-
-.login-box input[type="text"],
-.login-box input[type="password"] {
-    width: 100%;
-    min-width: 0;
-    padding: 0.52vw 0.52vw;
-    margin-bottom: 0;
-    border: none;
-    border-radius: 0.26vw;
-}
-
-.login-box input[type="submit"] {
+.login-box input[type="submit"],
+.upload-box input[type="submit"],
+.createFolder-box input[type="submit"] {
     width: 100%;
     padding: 0.52vw;
     background-color: #05769a;
@@ -91,39 +58,46 @@ body {
 
 
 .upload-box,
-.login-box {
+.login-box,
+.createFolder-box {
     width: min(25vw, 30vw);
     max-width: 30vw;
     background-color: #05489a;
     border-radius: 0.52vw;
     padding: 1.04vw;
     margin: 5.21vw auto;
-    position: static;
-    height: auto;
+    position: absolute;
+    top: 10vw;
+    left: 37.5vw;
+
 }
 
 .upload-box form,
-.login-box form {
+.login-box form,
+.createFolder-box form {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
 
 .upload-box h1,
-.login-box h1 {
+.login-box h1,
+.createFolder-box h1 {
     color: white;
     text-align: center;
 }
 
 .upload-box label,
-.login-box label {
+.login-box label,
+.createFolder-box label {
     color: white;
     display: block;
 }
 
 .upload-box input[type="file"],
 .login-box input[type="text"],
-.login-box input[type="password"] {
+.login-box input[type="password"],
+.createFolder-box input[type="text"] {
     width: 100%;
     min-width: 0;
     padding: 0.52vw 0.52vw;

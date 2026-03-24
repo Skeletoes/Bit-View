@@ -124,6 +124,30 @@ def upload_file():
             return redirect(url_for('home'))
     return render_template('upload_file.html')
 
+@app.route('/create_folder', methods=['GET', 'POST'])
+def create_folder():
+    """Handle new folder creation.
+
+    This route expects a POST request with a 'folder_name' field. It creates
+    a new directory with the given name inside the current user's upload
+    folder. After creating the folder, it redirects back to the home page.
+    """
+    if request.method == 'POST':
+        user_input = request.form['folder_name'].strip()
+        if not user_input:
+            flash("Enter a name for folder!", "error")
+        else:
+            folder_name = request.form['folder_name']
+            new_folder_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name)
+            try:
+                os.makedirs(new_folder_path, exist_ok=True)
+            except Exception as e:
+                flash(f"Error creating folder: {e}", "error")
+            return redirect(url_for('home'))
+    return render_template('create_folder.html')
+
+
+
 # ----------------------------------------------------------------------------
 # Route handlers
 # ----------------------------------------------------------------------------

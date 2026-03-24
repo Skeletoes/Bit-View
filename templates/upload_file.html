@@ -12,7 +12,12 @@
 {% endblock %}
 {% block body %}
 
-<div class="login-box">
+<div class="logo-background"></div>
+<div class="header-bar">
+    <button type="button" onclick="location.href='/home'">Exit</button>
+</div>
+
+<div class="upload-box">
     <h1>Upload new File</h1>
     <form method="post" enctype="multipart/form-data">
         <label for="file">Select file:</label>
