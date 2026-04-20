@@ -173,19 +173,35 @@ def user_login():
         username = request.form['username']
         password = request.form['password']
         query = """SELECT * FROM users WHERE username = ? AND password = ?"""
+        global user
         user = query_db(query, (username, password), one=True)
         if user is not None:
             print(f"User '{username}' logged in successfully!")
-            USER_FOLDER = user[6]
+            USER_FOLDER = user[5]
             app.config['UPLOAD_FOLDER'] = USER_FOLDER
             return redirect(url_for('home'))
         else:
             flash("Invalid credentials!", "error")
     return render_template('login.html')
 
+#@app.route('/folder_view')
+#def folder_view():
+
+
 @app.route('/home')
 def home():
-    return render_template('home.html')
+    mainDirectory = user[6]
+    userObjects = os.listdir(mainDirectory)
+    # folders = []
+    # files = []
+    # for object in userObjects:
+    #     object_path = os.path.join(mainDirectory, object)
+    #    if os.path.isfile(object_path):
+    #        files.append(object)
+    #    elif os.path.isdir(object_path):
+    #        folders.append(object)
+    # return render_template('home.html', files=files, folders=folders)
+    return render_template('home.html', objects=userObjects)
 
 
 
