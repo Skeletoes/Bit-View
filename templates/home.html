@@ -1,4 +1,15 @@
 {% extends "layout.html" %}
+{% block flashes %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+{% endblock %}
 {% block body %}
 
 
@@ -10,5 +21,47 @@
     </form>
     <button type="button" onclick="location.href='/'">Exit</button>
 </div>
+<div class="controls">
+    <ul>
+        <li><a href="/upload">Upload</a></li>
+        <li><a href="/download">Download</a></li>
+        <li><a href="/create_folder">New Folder</a></li>
+        <li><a href="/rename">Rename</a></li>
+        <li><a href="/delete">Delete</a></li>
+    </ul>
+</div>
+
+<div class="object-list">
+    <form action="/object_selection">
+        {% for object in objects %}
+            <div class="object-box">
+                <input type="radio" id="folderSelection" name="folderSelection" value="{{ object }}">
+                <label for="folderSelection">{{ object }}</label><br>
+            </div>
+        {% endfor %}
+    </form>
+</div>
 
 {% endblock %}
+
+
+<form action="/default" method="POST">
+    <div class="controls">
+        <ul>
+            <li><button type="submit" formaction="/upload">Upload</button></li>
+            <li><button type="submit" formaction="/download">Download</button></li>
+            <li><button type="submit" formaction="/create_folder">New Folder</button></li>
+            <li><button type="submit" formaction="/rename">Rename</button></li>
+            <li><button type="submit" formaction="/delete">Delete</button></li>
+        </ul>
+    </div>
+
+    <div class="object-list">
+        {% for object in objects %}
+            <div class="object-box">
+                <input type="radio" id="obj-{{ loop.index }}" name="folderSelection" value="{{ object }}" required>
+                <label for="obj-{{ loop.index }}">{{ object }}</label><br>
+            </div>
+        {% endfor %}
+    </div>
+</form>"""

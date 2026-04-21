@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block flashes %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+{% endblock %}
+{% block body %}
+
+<div class="logo-background"></div>
+<div class="header-bar">
+    <button type="button" onclick="location.href='/home'">Exit</button>
+</div>
+
+<div class="createFolder-box">
+    <h1>Create Folder</h1>
+    <form method="POST" action="/create_folder">
+        <label for="folder_name">Folder Name:</label>
+        <input type="text" id="folder_name" name="folder_name" placeholder="Folder Name" required><br><br>
+        <input type="submit" value="Create Folder">
+    </form>
+</div>
+
+{% endblock %}

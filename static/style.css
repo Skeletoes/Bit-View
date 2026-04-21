@@ -1,3 +1,9 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     background-image: url('images/VOLT-VIEW_background.jpg');
     background-size: cover;
@@ -7,46 +13,99 @@ body {
     
 }
 
-.login-box {
-    width: 18.75rem;
-    height: 18.75rem;
-    background-color: #05489a;
-    border-radius: 0.625rem;
-    padding: 1.25rem;
-    margin: 6.25rem auto;
-    position: static;
+.flashes {
+    list-style: none;
+    margin: 0.83vw auto;
+    padding: 0;
+    width: 15.63vw;
 }
 
-.login-box h1 {
+.flashes li {
+    padding: 0.42vw;
+    margin-bottom: 0.42vw;
+    border-radius: 0.26vw;
     color: white;
     text-align: center;
 }
 
-.login-box label {
-    color: white;
-    display: block;
+.flashes li.error {
+    background-color: #dc3545; /* Red for errors */
 }
 
-.login-box input[type="text"],
-.login-box input[type="password"] {
-    width: 100%;
-    padding: 0.625rem 0rem;
-    margin-bottom: 0.625rem;
-    border: none;
-    border-radius: 0.3125rem;
+.flashes li.success {
+    background-color: #28a745; /* Green for success */
 }
 
-.login-box input[type="submit"] {
+.flashes li.warning {
+    background-color: #ffc107; /* Yellow for warnings */
+    color: black;
+}
+
+
+
+.login-box input[type="submit"],
+.upload-box input[type="submit"],
+.createFolder-box input[type="submit"] {
     width: 100%;
-    padding: 0.625rem;
+    padding: 0.52vw;
     background-color: #05769a;
     color: white;
     border: none;
-    border-radius: 0.3125rem;
+    border-radius: 0.26vw;
     cursor: pointer;
 }
 
 
+
+.upload-box,
+.login-box,
+.createFolder-box {
+    width: min(25vw, 30vw);
+    max-width: 30vw;
+    background-color: #05489a;
+    border-radius: 0.52vw;
+    padding: 1.04vw;
+    margin: 5.21vw auto;
+    position: absolute;
+    top: 10vw;
+    left: 37.5vw;
+
+}
+
+.upload-box form,
+.login-box form,
+.createFolder-box form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.upload-box h1,
+.login-box h1,
+.createFolder-box h1 {
+    color: white;
+    text-align: center;
+}
+
+.upload-box label,
+.login-box label,
+.createFolder-box label {
+    color: white;
+    display: block;
+}
+
+.upload-box input[type="file"],
+.login-box input[type="text"],
+.login-box input[type="password"],
+.createFolder-box input[type="text"] {
+    width: 100%;
+    min-width: 0;
+    padding: 0.52vw 0.52vw;
+    margin-bottom: 0;
+    border: none;
+    border-radius: 0.26vw;
+    background-color: #ffffff;
+}
 
 .logo-background {
     position: fixed;
@@ -69,41 +128,77 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 1rem;
+    padding: 0 0.83vw;
     z-index: -1;  /* Position behind other elements */
 }
 
 .header-bar input[type="text"] {
-    padding: 1rem;
+    padding: 0.83vw;
     border: none;
-    border-radius: 1rem;
+    border-radius: 0.83vw;
     position: absolute;
-    top: 1.5rem;
-    left: 37.5rem;
+    top: 1.5vw;
+    left: 40vw;
     z-index: 1;  /* Ensure the input is above the header background */
-    width: 20rem;
+    width: 20vw;
 }
 
 .header-bar button[type="submit"] {
-    padding: 0.62rem 1rem;
+    padding: 0.45vw 0.83vw;
     background-color: #05769a;
     color: white;
     border: none;
-    border-radius: 1rem;
+    border-radius: 0.83vw;
     cursor: pointer;
     position: absolute;
-    top: 1.5rem;
-    left: 56rem;
+    top: 1.5vw;
+    left: 56.8vw;
     z-index: 1;  /* Ensure the button is above the header background */
 }
 
 .header-bar button[type="button"] {
     position: absolute;
-    right: 3rem;
-    padding: 1rem 1rem;
+    right: 3vw;
+    top: 1.5vw;
+    padding: 0.83vw 0.83vw;
     background-color: #05769a;
     color: white;
     border: none;
-    border-radius: 1rem;
+    border-radius: 0.83vw;
     cursor: pointer;
+}
+
+.controls ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 15vw;
+    background-color: #05489a;
+    position: absolute;
+    top: 15vw;
+    left: 0;
+}
+
+.controls li a {
+    display: block;
+    color: rgb(255, 255, 255);
+    padding: 1.33vw 2.67vw;
+    text-decoration: none;
+}
+
+.controls li a:hover {
+    background-color: #05769a;
+    color: white;
+}
+
+.object-list {
+    position: absolute;
+    margin: 12.5vw 22.5vw;
+}
+
+.object-box {
+    background-color: #05769a;
+    border-radius: 0.5vw;
+    padding: 1vw 20vw;
+    margin: 1vw;
 }
