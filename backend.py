@@ -25,8 +25,8 @@ from flaskwebgui import FlaskUI
 # ----------------------------------------------------------------------------
 # Configuration constants
 # ----------------------------------------------------------------------------
-
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'exe'}
+UPLOAD_FOLDER = 'upload_folder'
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 # Determine path to database; supports normal script and PyInstaller bundle
 if getattr(sys, 'frozen', False):
@@ -42,8 +42,7 @@ DATABASE = os.path.join(database_dir, 'database.db')
 # Application setup
 # ----------------------------------------------------------------------------
 app = Flask(__name__)
-app.secret_key = "qa567-KLu8T-ZgD45-9sdfg-1234"  # Needed for flashing messages
-
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def allowed_file(filename):
     """Return True if the filename has an allowed extension.
@@ -94,6 +93,15 @@ def query_db(query, args=(), one=False):
     cur.close()
     return (rv[0] if rv else None) if one else rv
 
+@app.route('/download/<name>')
+def download_file(name):
+    """Dummy download endpoint.
+
+    In a production version this would send the file back to the client
+    using ``send_from_directory`` or a similar helper. Here it simply
+    returns a string for demonstration purposes.
+    """
+    return f"File '{name}' downloaded!"
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
@@ -121,32 +129,8 @@ def upload_file():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('home'))
-    return render_template('upload_file.html')
-
-@app.route('/create_folder', methods=['GET', 'POST'])
-def create_folder():
-    """Handle new folder creation.
-
-    This route expects a POST request with a 'folder_name' field. It creates
-    a new directory with the given name inside the current user's upload
-    folder. After creating the folder, it redirects back to the home page.
-    """
-    if request.method == 'POST':
-        user_input = request.form['folder_name'].strip()
-        if not user_input:
-            flash("Enter a name for folder!", "error")
-        else:
-            folder_name = request.form['folder_name']
-            new_folder_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name)
-            try:
-                os.makedirs(new_folder_path, exist_ok=True)
-            except Exception as e:
-                flash(f"Error creating folder: {e}", "error")
-            return redirect(url_for('home'))
-    return render_template('create_folder.html')
-
-
+            return redirect(url_for('download_file', name=filename))
+    return render_template('uploadFile.html')
 
 # ----------------------------------------------------------------------------
 # Route handlers
@@ -172,38 +156,18 @@ def user_login():
         # Here you would normally validate the username and password
         username = request.form['username']
         password = request.form['password']
-        query = """SELECT * FROM users WHERE username = ? AND password = ?"""
-        global user
+        query = """SELECT * FROM user WHERE username = ? AND password = ?"""
         user = query_db(query, (username, password), one=True)
         if user is not None:
             print(f"User '{username}' logged in successfully!")
-            USER_FOLDER = user[5]
-            app.config['UPLOAD_FOLDER'] = USER_FOLDER
             return redirect(url_for('home'))
         else:
-            flash("Invalid credentials!", "error")
+            print(f"Login failed")
     return render_template('login.html')
-
-#@app.route('/folder_view')
-#def folder_view():
-
 
 @app.route('/home')
 def home():
-    mainDirectory = user[6]
-    userObjects = os.listdir(mainDirectory)
-    # folders = []
-    # files = []
-    # for object in userObjects:
-    #     object_path = os.path.join(mainDirectory, object)
-    #    if os.path.isfile(object_path):
-    #        files.append(object)
-    #    elif os.path.isdir(object_path):
-    #        folders.append(object)
-    # return render_template('home.html', files=files, folders=folders)
-    return render_template('home.html', objects=userObjects)
-
-
+    return render_template('home.html')
 
 if __name__ == '__main__':
     FlaskUI(app=app, server="flask", width=800, height=480, port=8000).run()

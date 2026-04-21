@@ -1,0 +1,21 @@
+[33me1703b6[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{0}: reset: moving to origin/main
+[33ma3c2d63[m HEAD@{1}: commit: Remove large exe from history
+[33m1af3fdb[m HEAD@{2}: reset: moving to HEAD~1
+[33mbcd41da[m HEAD@{3}: commit: Fix: added gitignore and removed large files from tracking
+[33m1af3fdb[m HEAD@{4}: reset: moving to HEAD~1
+[33mdb998b4[m HEAD@{5}: commit: trying to fix git error
+[33m1af3fdb[m HEAD@{6}: commit: experiencing errors with wit git
+[33mde9d1bc[m HEAD@{7}: commit: added the add folder feature and worked on aesthetic for login, upload and create folder pages
+[33m4a38da4[m HEAD@{8}: commit: almost complete the alyout of the upload file page
+[33mf2c9f83[m HEAD@{9}: commit: Adding more features and worked on the layout
+[33me1703b6[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{10}: commit: looking better
+[33m925810d[m HEAD@{11}: commit: added some aesthetic and got some of the main components in place
+[33mb88824b[m HEAD@{12}: commit: setup the layout html file and started working on the aesthetic
+[33mdd36524[m HEAD@{13}: commit: started adding the code for the login and prepared the html files a bit better
+[33md13d875[m HEAD@{14}: commit: changed the filenames because i decided that this will turn out to be my actual project
+[33m66d40e3[m HEAD@{15}: commit: added some database connection code (havent tested it yet though)
+[33mc0f4b52[m HEAD@{16}: commit: set up the database file
+[33md4921cc[m HEAD@{17}: pull --tags origin main: Fast-forward
+[33me8ac9ad[m HEAD@{18}: commit: little file adjustement
+[33m53cd752[m HEAD@{19}: commit: setup the basic uploading function
+[33mb23ce34[m HEAD@{20}: commit (initial): first commit
