@@ -7,6 +7,13 @@ adminFolder/
 # Ignore local database files (usually best to keep these local)
 *.db
 
+*.txt
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.gif
+
 # Python specific ignores
 __pycache__/
 *.py[cod]

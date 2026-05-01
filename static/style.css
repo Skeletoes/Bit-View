@@ -168,6 +168,7 @@ body {
     cursor: pointer;
 }
 
+
 .controls ul {
     list-style-type: none;
     margin: 0;
@@ -191,6 +192,40 @@ body {
     color: white;
 }
 
+
+.file-controls button[type="submit"] {
+    display: block;
+    background-color: #05489a;
+    color: rgb(255, 255, 255);
+    padding: 1.33vw 2.67vw;
+    width: 15vw;
+    text-decoration: none;
+    text-align: left;
+    border: none;
+    cursor: pointer;
+    font-size: inherit;
+    font-family: inherit;
+}
+
+.file-controls button[type="submit"]:hover {
+    background-color: #05769a;
+    color: white;
+}
+
+.file-controls ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 15vw;
+    background-color: #05489a;
+    position: absolute;
+    top: 23.1vw;
+    left: 0;
+}
+
+
+
+
 .object-list {
     position: absolute;
     margin: 12.5vw 22.5vw;
@@ -202,3 +237,5 @@ body {
     padding: 1vw 20vw;
     margin: 1vw;
 }
+
+

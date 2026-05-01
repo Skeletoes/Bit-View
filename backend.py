@@ -18,7 +18,7 @@ import sys
 import sqlite3
 
 # Third-party imports
-from flask import Flask, flash, request, redirect, url_for, render_template, g
+from flask import Flask, flash, request, redirect, url_for, render_template, g, send_file
 from werkzeug.utils import secure_filename
 from flaskwebgui import FlaskUI
 
@@ -27,6 +27,7 @@ from flaskwebgui import FlaskUI
 # ----------------------------------------------------------------------------
 
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'exe'}
+VIEWABLE_FILES = {'png', 'jpg', 'jpeg'}
 
 # Determine path to database; supports normal script and PyInstaller bundle
 if getattr(sys, 'frozen', False):
@@ -202,6 +203,31 @@ def home():
     #        folders.append(object)
     # return render_template('home.html', files=files, folders=folders)
     return render_template('home.html', objects=userObjects)
+
+@app.route('/download', methods=['POST'])
+def download():
+    mainDirectory = user[6]
+    objectSelection = request.form.get('objectSelection')
+    objectPath = os.path.join(mainDirectory, objectSelection)
+    if os.path.isfile(objectPath):
+        return send_file(objectPath, as_attachment=True)
+        print(f"{objectPath} is a file")
+    elif os.path.isdir(objectPath):
+        print(f"{objectPath} is a folder")
+    return render_template('home.html')
+
+@app.route('/view', methods=['POST'])
+def view():
+    mainDirectory = user[6]
+    objectSelection = request.form.get('objectSelection')
+    objectPath = os.path.join(mainDirectory, objectSelection)
+    if os.path.isfile(objectPath):
+        print(f"{objectPath} is a file")
+        if objectPath.rsplit('.', 1)[1].lower() in VIEWABLE_FILES:
+            print(f"{objectPath} is viewable")
+    elif os.path.isdir(objectPath):
+        print(f"{objectPath} is a folder")
+
 
 
 
