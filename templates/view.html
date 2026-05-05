@@ -1,6 +1,11 @@
 {% extends "layout.html" %}
 {% block body %}
 
-<img src="{{ objectView }}" alt="The design team collaborating" width="200px">
+<div class="logo-background"></div>
+<div class="header-bar">
+    <button type="button" onclick="location.href='/home'">Exit</button>
+</div>
+
+<img src="{{ objectView }}" alt="The design team collaborating" class="objectView">
 
 {% endblock %}
