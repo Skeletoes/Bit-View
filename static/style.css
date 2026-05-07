@@ -255,9 +255,14 @@ body {
     cursor: pointer;
     font-size: inherit;
     font-family: inherit;
-    padding: 1vw;
+    padding: 0.5vw;
     text-align: left;
     flex: 1;
+}
+
+.object-box label {
+    background-color: #05489a;
+    padding: 0.5vw;
 }
 
 .object-box button[type="submit"]:hover {

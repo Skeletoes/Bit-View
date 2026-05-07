@@ -41,8 +41,8 @@
     <div class="object-list">
         {% for object in objects %}
             <div class="object-box">
-                <input type="radio" id="obj-{{ loop.index }}" name="objectSelection" value="{{ object }}" required>
-                <button type="submit" formaction="/view"><label for="obj-{{ loop.index }}">{{ object }}</label></button><br>
+                <button type="submit" formaction="/view"><input type="radio" id="obj-{{ loop.index }}" name="objectSelection" value="{{ object }}" required>
+                <label for="obj-{{ loop.index }}">{{ object }}</button></label><br>
             </div>
         {% endfor %}
     </div>
