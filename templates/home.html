@@ -12,7 +12,6 @@
 {% endblock %}
 {% block body %}
 
-
 <div class="logo-background"></div>
 <div class="header-bar">
     <form class="search-form" action="/search" method="GET">
@@ -41,8 +40,8 @@
     <div class="object-list">
         {% for object in objects %}
             <div class="object-box">
-                <button type="submit" formaction="/view"><input type="radio" id="obj-{{ loop.index }}" name="objectSelection" value="{{ object }}" required>
-                <label for="obj-{{ loop.index }}">{{ object }}</button></label><br>
+                <input type="radio" id="obj-{{ loop.index }}" name="objectSelection" value="{{ object }}">
+                <button type="submit" formaction="/view" name="viewSelection" value="{{ object }}">{{ object }}</button>
             </div>
         {% endfor %}
     </div>

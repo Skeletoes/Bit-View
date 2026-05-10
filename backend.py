@@ -282,16 +282,19 @@ def view():
     else is silently ignored and falls back to /home.
     """
     mainDirectory = user[6]
-    objectSelection = request.form.get('objectSelection')
+    objectSelection = request.form.get('viewSelection')
     objectPath = os.path.join(mainDirectory, objectSelection)
 
     if os.path.isfile(objectPath):
         extension = objectPath.rsplit('.', 1)[1].lower()
-
         if extension in VIEWABLE_FILES:
             # Build a proper URL via serve_file so the browser can fetch it
             file_url = url_for('serve_file', filename=objectSelection)
             return render_template('view.html', objectView=file_url)
+    elif os.path.isdir(objectPath):
+        folderObjects = os.listdir(objectPath)
+        return render_template('home.html', objects=folderObjects)
+
 
     # Not a viewable file – redirect back to home
     return redirect(url_for('home'))

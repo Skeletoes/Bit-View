@@ -248,7 +248,7 @@ body {
 }
 
 .object-box button[type="submit"] {
-    background-color:#05489a;
+    background-color: #05489a;
     border-radius: 0.5vw;
     color: white;
     border: none;
@@ -258,11 +258,14 @@ body {
     padding: 0.5vw;
     text-align: left;
     flex: 1;
+    width: 100%;        /* fill the box */
+    display: block;
 }
 
 .object-box label {
     background-color: #05489a;
-    padding: 0.5vw;
+
+
 }
 
 .object-box button[type="submit"]:hover {
