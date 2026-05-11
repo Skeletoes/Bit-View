@@ -152,7 +152,6 @@ def user_login():
 
         if user is not None:
             # Store the user's upload folder in Flask config for easy access
-            app.config['UPLOAD_FOLDER'] = user[5]
             return redirect(url_for('home'))
         else:
             flash("Invalid credentials!", "error")
@@ -165,12 +164,18 @@ def user_login():
 @app.route('/home')
 def home():
     """List all files and folders in the logged-in user's main directory."""
+    app.config['UPLOAD_FOLDER'] = user[5]
     mainDirectory = user[6]
     userObjects = os.listdir(mainDirectory)
     return render_template('home.html', objects=userObjects)
 
 
 # --- Folder management -------------------------------------------------------
+
+def folder_handling(folder, task):
+    if task == 'basename':
+        return os.path.basename(folder)
+    
 
 @app.route('/create_folder', methods=['GET', 'POST'])
 def create_folder():
@@ -291,9 +296,10 @@ def view():
             # Build a proper URL via serve_file so the browser can fetch it
             file_url = url_for('serve_file', filename=objectSelection)
             return render_template('view.html', objectView=file_url)
-    elif os.path.isdir(objectPath):
-        folderObjects = os.listdir(objectPath)
-        return render_template('home.html', objects=folderObjects)
+    elif os.path.isdir(objectPath): # If the user selectected a folder to view
+        folderObjects = os.listdir(objectPath) # Create a list of the files within the choosen folder
+        app.config['UPLOAD_FOLDER'] = folder_handling(objectPath, 'basename') # 
+        return render_template('folder_view.html', objects=folderObjects) # Send the list to the folder_view page
 
 
     # Not a viewable file – redirect back to home
