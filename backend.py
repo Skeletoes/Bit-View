@@ -28,7 +28,7 @@ import sqlite3
 # ============================================================================
 from flask import (
     Flask, abort, flash, g, redirect, render_template,
-    request, send_file, url_for
+    request, send_file, url_for, session
 )
 from flaskwebgui import FlaskUI
 from werkzeug.utils import secure_filename
@@ -126,6 +126,7 @@ def query_db(query, args=(), one=False):
 @app.route('/')
 def index():
     """Redirect the root URL to the login page."""
+    session.clear()
     return redirect(url_for('user_login'))
 
 
@@ -164,17 +165,17 @@ def user_login():
 @app.route('/home')
 def home():
     """List all files and folders in the logged-in user's main directory."""
-    app.config['UPLOAD_FOLDER'] = user[5]
-    mainDirectory = user[6]
-    userObjects = os.listdir(mainDirectory)
+    session['baseDir'] = user[5]
+    session['mainDir'] = user[6]
+    userObjects = os.listdir(session['mainDir'])
     return render_template('home.html', objects=userObjects)
 
 
 # --- Folder management -------------------------------------------------------
 
 def folder_handling(folder, task):
-    if task == 'basename':
-        return os.path.basename(folder)
+    if task == 'diveIn':
+        return(f"")
     
 
 @app.route('/create_folder', methods=['GET', 'POST'])
@@ -243,9 +244,8 @@ def download():
     Expects 'objectSelection' in the POST body (the filename relative to the
     user's main directory).
     """
-    mainDirectory = user[6]
     objectSelection = request.form.get('objectSelection')
-    objectPath = os.path.join(mainDirectory, objectSelection)
+    objectPath = os.path.join(session['mainDir'], objectSelection)
 
     if os.path.isfile(objectPath):
         # as_attachment=True triggers a Save-As dialog in the browser
@@ -267,11 +267,10 @@ def serve_file(filename):
     A path-traversal guard ensures that 'filename' cannot escape the user's
     main directory (e.g. via '../../etc/passwd').
     """
-    mainDirectory = user[6]
-    safe_path = os.path.join(mainDirectory, filename)
+    safe_path = os.path.join(session['mainDir'], filename)
 
     # Resolve symlinks / '..' segments and confirm we're still inside mainDirectory
-    if not os.path.abspath(safe_path).startswith(os.path.abspath(mainDirectory)):
+    if not os.path.abspath(safe_path).startswith(os.path.abspath(session['mainDir'])):
         abort(403)  # Forbidden – attempted directory traversal
 
     return send_file(safe_path)
@@ -286,9 +285,8 @@ def view():
     Only files whose extension is in VIEWABLE_FILES are served; everything
     else is silently ignored and falls back to /home.
     """
-    mainDirectory = user[6]
     objectSelection = request.form.get('viewSelection')
-    objectPath = os.path.join(mainDirectory, objectSelection)
+    objectPath = os.path.join(session['mainDir'], objectSelection)
 
     if os.path.isfile(objectPath):
         extension = objectPath.rsplit('.', 1)[1].lower()
@@ -298,7 +296,7 @@ def view():
             return render_template('view.html', objectView=file_url)
     elif os.path.isdir(objectPath): # If the user selectected a folder to view
         folderObjects = os.listdir(objectPath) # Create a list of the files within the choosen folder
-        app.config['UPLOAD_FOLDER'] = folder_handling(objectPath, 'basename') # 
+        session['currentDir'] = folder_handling(objectPath, 'diveIn') # 
         return render_template('folder_view.html', objects=folderObjects) # Send the list to the folder_view page
 
 
